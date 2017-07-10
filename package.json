@@ -1,0 +1,24 @@
+{
+  "name": "@echo-health/fb-auth-util",
+  "version": "0.0.6",
+  "description": "A firebase auth util cli",
+  "bin": {
+    "fb-auth-util": "./src/cli.js"
+  },
+  "author": "Nick Assendelft",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echo-health/firebase-auth-util"
+  },
+  "dependencies": {
+    "@echo-health/fb-auth-util": "^0.0.4",
+    "chalk": "^2.0.1",
+    "commander": "^2.11.0",
+    "firebase-admin": "^5.0.0",
+    "global": "^4.3.2"
+  },
+  "files": [
+    "src"
+  ]
+}

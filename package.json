@@ -1,6 +1,6 @@
 {
   "name": "@echo-health/fb-auth-util",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A firebase auth util cli",
   "bin": {
     "fb-auth-util": "./src/cli.js"

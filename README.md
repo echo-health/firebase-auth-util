@@ -11,21 +11,13 @@ This command line interface bridges this and allows users to easily integrate it
 ## Installing
 **fb-auth-util** can be installed locally or globally, whatever you prefer.
 
-### Global
 ```
-$ npm install @echo-health/fb-auth-util -g
-```
-Or if you prefer yarn
-```
-$ yarn global add @echo-health/fb-auth-util
-```
-
-### Local
-```
-npm install @echo-health/fb-auth-util
+$ npm install @echo-health/fb-auth-util -g // global
+$ npm install @echo-health/fb-auth-util
 ```
 Or if you prefer yarn
 ```
+$ yarn global add @echo-health/fb-auth-util  // global
 $ yarn add @echo-health/fb-auth-util
 ```
 
@@ -42,13 +34,35 @@ $ fb-auth-util --help
 
     -c --credentials <credentials>  Path to your Firebase credentials file
     -j --json                       Output in json
-    -t --type <type>                Type can be either add, update or remove.
+    -t --type <type>                Type can be either get, add, update or remove.
     -u --user <user>                The user object. Value must be in json format.
     -h, --help                      output usage information
 ```
 
-#### Pipeing output into another program
-One use case might be to pipe the results of the user object into another program, for example [`jq`](https://stedolan.github.io/jq/). You can acheive this by using the `--json`flag. For example:
+#### User object
+
+- **uid** _String_ The uid of the user to update.
+- **email** _String_ The user's primary email. Must be a valid email address.
+- **emailVerified** _boolean_ Whether or not the user's primary email is verified. If not provided, the default is false.
+- **password** _String_ The user's raw, unhashed password. Must be at least six characters long (only used when updating or adding).
+- **displayName** _String_ The users' display name.
+- **photoURL** _String_ The user's photo URL.
+- **disabled** _boolean_ Whether or not the user is disabled. true for disabled; false for enabled. If not provided, the default is false.
+
+#### Get
+Only `{ "uid": "..." }` or `{ "email": "..." }` is used in the `--user` argument
+
+#### Remove
+Only `{ "uid": "..." }` is used in the `--user` argument
+
+#### Add
+Only `{ "email": "..." }` key is **mandatory** in the `--user` argument
+
+#### Update
+Only `{ "uid": "..." }` is used in the `--user` argument and **at least one** other key needs to be included
+
+### Pipeing output into another program
+One use case might be to pipe the results of the user object into another program, for example [`jq`](https://stedolan.github.io/jq/). You can acheive this by using the `--json` flag. For example:
 
 ```
 $ fb-auth-util --type get --user '{"email": "test@test.com"}' --json | jq -r '.uid'
